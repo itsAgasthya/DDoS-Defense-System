@@ -26,6 +26,17 @@ A real-time DDoS defense system with a modern web interface for monitoring and c
   - Model status overview
   - Responsive Material-UI design
 
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/0c488bcd-ad4a-4a48-93a2-665416d556cb)
+
+![image](https://github.com/user-attachments/assets/42e5a652-2c42-4e1c-9fa2-5124a3527fb7)
+
+![image](https://github.com/user-attachments/assets/ac1f28a8-d62c-4fa1-93d5-97654170b5df)
+
+![image](https://github.com/user-attachments/assets/e7dc2df2-e948-478d-a5fc-8dfc5dbcb750)
+
+
 ## System Requirements
 
 - Python 3.9+
