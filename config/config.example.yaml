@@ -1,0 +1,112 @@
+# System Configuration
+system:
+  name: "ddos-defense"
+  version: "0.1.0"
+  environment: "development"  # development, staging, production
+  log_level: "INFO"
+  debug: true
+
+# Network Settings
+network:
+  interface: "eth0"
+  capture_buffer_size: 1048576  # 1MB
+  max_packet_size: 65535
+  sampling_rate: 1.0  # 1.0 = 100% packet capture
+
+# Anomaly Detection
+anomaly_detection:
+  window_size: 300  # seconds
+  update_interval: 60  # seconds
+  algorithms:
+    - name: "statistical"
+      enabled: true
+      z_score_threshold: 3.0
+    - name: "isolation_forest"
+      enabled: true
+      contamination: 0.1
+    - name: "autoencoder"
+      enabled: false
+      threshold: 0.95
+
+# Adaptive Response
+adaptive_response:
+  min_confidence: 0.8
+  action_timeout: 300  # seconds
+  max_block_duration: 3600  # seconds
+  rate_limit_threshold: 1000  # requests per second
+  actions:
+    - "rate_limit"
+    - "block"
+    - "redirect"
+    - "challenge"
+
+# Machine Learning
+ml:
+  model_path: "models/"
+  training_interval: 86400  # 24 hours
+  batch_size: 128
+  epochs: 100
+  validation_split: 0.2
+  early_stopping_patience: 10
+
+# Blockchain
+blockchain:
+  network: "testnet"  # mainnet, testnet
+  provider_url: "http://localhost:8545"
+  contract_address: ""
+  gas_limit: 2000000
+  confirmation_blocks: 2
+
+# Database
+database:
+  mongodb:
+    uri: "mongodb://localhost:27017"
+    database: "ddos_defense"
+  redis:
+    host: "localhost"
+    port: 6379
+    db: 0
+
+# API
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+
+# Monitoring
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+  elasticsearch:
+    enabled: false
+    hosts: ["http://localhost:9200"]
+    index_prefix: "ddos-defense"
+
+# Alerts
+alerts:
+  enabled: true
+  channels:
+    email:
+      enabled: true
+      smtp_server: "smtp.gmail.com"
+      smtp_port: 587
+      from_address: ""
+      to_addresses: []
+    slack:
+      enabled: false
+      webhook_url: ""
+
+# Security
+security:
+  api_key_required: true
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 60
+  jwt:
+    secret_key: ""
+    algorithm: "HS256"
+    access_token_expire_minutes: 30 
