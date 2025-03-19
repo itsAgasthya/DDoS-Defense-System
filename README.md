@@ -1,61 +1,152 @@
 # DDoS Defense System
 
-A real-time DDoS defense system with a modern web interface for monitoring and controlling network traffic, featuring nature-inspired defense mechanisms and predictive security.
+A comprehensive DDoS defense system that combines machine learning, blockchain technology, and adaptive response mechanisms to protect against distributed denial of service attacks.
+
+## Architecture Overview
+
+### System Architecture
+```mermaid
+graph TB
+    subgraph Frontend
+        UI[React Frontend]
+        API[API Context]
+        Components[UI Components]
+    end
+
+    subgraph Backend
+        API_Server[FastAPI Server]
+        ML_Models[ML Models]
+        Blockchain[Blockchain Integration]
+        Monitoring[Monitoring System]
+    end
+
+    subgraph ML Models
+        IF[Isolation Forest]
+        LSTM[LSTM Neural Network]
+        RFC[Random Forest Classifier]
+        ARS[Adaptive Response System]
+        BV[Blockchain Validator]
+    end
+
+    subgraph Monitoring
+        PS[Packet Scanner]
+        TA[Traffic Analyzer]
+        AD[Anomaly Detector]
+        PA[Predictive Analysis]
+    end
+
+    UI --> API
+    API --> Components
+    API --> API_Server
+    API_Server --> ML_Models
+    API_Server --> Blockchain
+    API_Server --> Monitoring
+    ML_Models --> Monitoring
+    Monitoring --> Blockchain
+```
+
+### Component Architecture
+```mermaid
+graph LR
+    subgraph Frontend Components
+        Dashboard[Dashboard]
+        Monitoring[Monitoring]
+        Models[Models]
+        Settings[Settings]
+    end
+
+    subgraph Backend Services
+        API[API Endpoints]
+        ML[ML Services]
+        BC[Blockchain Services]
+        Monitor[Monitoring Services]
+    end
+
+    Dashboard --> API
+    Monitoring --> API
+    Models --> API
+    Settings --> API
+
+    API --> ML
+    API --> BC
+    API --> Monitor
+```
 
 ## Features
 
-- **Real-time Traffic Monitoring**
-  - Live packet processing statistics
-  - Dynamic threat level indicators
-  - Packets per second (PPS) monitoring
-  - System uptime tracking
-  - Alert history and notifications
+### 1. Real-time Monitoring
+- Packet scanning and analysis
+- Traffic pattern detection
+- Anomaly detection
+- Real-time threat level assessment
 
-- **Intelligent Defense Mechanisms**
-  - Multiple detection models:
-    - Anomaly Detection
-    - DDoS Classification
-    - Traffic Analysis
-  - Adaptive threat level assessment
-  - Configurable alert thresholds
+### 2. Machine Learning Models
+- Isolation Forest for anomaly detection
+- LSTM Neural Network for attack prediction
+- Random Forest Classifier for attack type classification
+- Adaptive Response System for dynamic mitigation
+- Blockchain Validator for attack pattern sharing
 
-- **Modern Web Interface**
-  - Real-time dashboard with live updates
-  - Interactive monitoring controls
-  - Configurable system settings
-  - Model status overview
-  - Responsive Material-UI design
+### 3. Blockchain Integration
+- Immutable attack record storage
+- Attack pattern sharing across networks
+- Consensus-based validation
+- Smart contract-based automation
 
-## System Requirements
+### 4. Adaptive Response
+- Dynamic mitigation strategies
+- Real-time response adjustment
+- Multiple mitigation techniques
+- Performance optimization
 
-- Python 3.9+
-- Node.js 14+ and npm
-- Modern web browser
+### 5. Predictive Analysis
+- Attack probability prediction
+- Trend analysis
+- Pattern recognition
+- Early warning system
 
-## Project Structure
+## Technology Stack
 
-```
-ddos-defense/
-├── backend/                 # FastAPI backend server
-│   ├── main.py             # Main server file
-│   └── requirements.txt    # Python dependencies
-├── frontend/               # React frontend
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── contexts/       # React contexts
-│   │   └── App.tsx        # Main application
-│   └── package.json       # Node.js dependencies
-└── README.md              # This file
-```
+### Frontend
+- React
+- TypeScript
+- Material-UI
+- Axios
+- React Router
 
-## Quick Start
+### Backend
+- FastAPI
+- Python
+- TensorFlow
+- Web3.py
+- Prometheus
 
-### Backend Setup
+### Machine Learning
+- Isolation Forest
+- LSTM Neural Network
+- Random Forest Classifier
+- Adaptive Response System
 
-1. Create and activate a Python virtual environment:
+### Blockchain
+- Ethereum
+- Smart Contracts
+- Web3 Integration
+- IPFS (for pattern sharing)
+
+## Getting Started
+
+### Prerequisites
+- Python 3.8+
+- Node.js 14+
+- Ethereum node (for blockchain features)
+- TensorFlow 2.x
+
+### Installation
+
+1. Clone the repository:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+git clone https://github.com/yourusername/ddos-defense.git
+cd ddos-defense
 ```
 
 2. Install backend dependencies:
@@ -64,80 +155,73 @@ cd backend
 pip install -r requirements.txt
 ```
 
-3. Start the backend server:
-```bash
-uvicorn main:app --reload
-```
-
-The backend will be available at http://localhost:8000
-
-### Frontend Setup
-
-1. Install frontend dependencies:
+3. Install frontend dependencies:
 ```bash
 cd frontend
 npm install
 ```
 
-2. Start the frontend development server:
+4. Start the backend server:
 ```bash
+cd backend
+uvicorn main:app --reload
+```
+
+5. Start the frontend development server:
+```bash
+cd frontend
 npm start
 ```
 
-The frontend will be available at http://localhost:3000
+## Configuration
 
-## Usage Guide
+### Backend Configuration
+The backend configuration can be modified in `backend/config.py`:
+- API endpoints
+- ML model parameters
+- Blockchain connection settings
+- Monitoring thresholds
 
-1. **Start Monitoring**
-   - Navigate to http://localhost:3000/monitoring
-   - Click "Start Monitoring" to begin traffic analysis
-   - Use "Stop Monitoring" to halt the system
+### Frontend Configuration
+Frontend configuration is available in `frontend/src/config.ts`:
+- API endpoints
+- UI settings
+- Theme configuration
 
-2. **View Dashboard**
-   - Go to http://localhost:3000
-   - Monitor real-time statistics:
-     - Current threat level
-     - Packets processed
-     - Packets per second
-     - System uptime
-     - Recent alerts
+## API Documentation
 
-3. **Configure Settings**
-   - Visit http://localhost:3000/settings
-   - Adjust alert thresholds:
-     - Critical level (default: 1000 PPS)
-     - High level (default: 750 PPS)
-     - Medium level (default: 500 PPS)
-   - Save changes to update the system
+### Monitoring Endpoints
+- `GET /monitoring/status` - Get current monitoring status
+- `POST /monitoring/start` - Start monitoring
+- `POST /monitoring/stop` - Stop monitoring
+- `GET /monitoring/attack-types` - Get available attack types
+- `POST /monitoring/alert-thresholds` - Update alert thresholds
 
-4. **Check Detection Models**
-   - Access http://localhost:3000/models
-   - View active detection models
-   - Monitor model status and descriptions
+### ML Model Endpoints
+- `GET /models/status` - Get ML models status
+- `POST /models/train` - Train ML models
+- `GET /models/predictions` - Get model predictions
 
-## API Endpoints
-
-- `GET /monitoring/status` - Get current monitoring status and statistics
-- `POST /monitoring/start` - Start the monitoring system
-- `POST /monitoring/stop` - Stop the monitoring system
-- `PUT /monitoring/thresholds` - Update alert thresholds
-
-## Development
-
-The system uses:
-- FastAPI for the backend API
-- React with TypeScript for the frontend
-- Material-UI for the user interface
-- Real-time updates with 5-second polling interval
+### Blockchain Endpoints
+- `GET /blockchain/status` - Get blockchain connection status
+- `POST /blockchain/record` - Record attack event
+- `GET /blockchain/patterns` - Get shared attack patterns
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Material-UI for the component library
+- FastAPI for the backend framework
+- TensorFlow for ML capabilities
+- Web3.py for blockchain integration 
